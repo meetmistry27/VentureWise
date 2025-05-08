@@ -97,7 +97,7 @@ export default function StartupGrowthCharts({ params }) {
   
       try {
         // 1. Fetch startup details by name
-        const startupRes = await fetch(`http://localhost:3000/api/startups/${name}`); // your custom endpoint
+        const startupRes = await fetch(`/api/startups/${name}`); // your custom endpoint
         const startupJson = await startupRes.json();
         
         console.log(startupJson);
