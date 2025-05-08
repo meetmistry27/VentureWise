@@ -207,7 +207,7 @@ export default function HowItWorksPage() {
                   <div className="md:w-1/2 bg-white p-4 rounded-xl shadow-md">
                     <div className="aspect-video relative bg-gray-100 rounded-lg overflow-hidden">
                       <Image
-                        src="/startupdashboard1.jpg"
+                        src="/startupdashboard.jpg"
                         alt="Startup Dashboard"
                         fill
                         className="object-cover"
@@ -244,7 +244,7 @@ export default function HowItWorksPage() {
                   <div className="md:w-1/2 bg-white p-4 rounded-xl shadow-md">
                     <div className="aspect-video relative bg-gray-100 rounded-lg overflow-hidden">
                       <Image
-                        src="/placeholder.svg?height=400&width=600"
+                        src="/riskassessment.jpg"
                         alt="Risk Assessment"
                         fill
                         className="object-cover"
@@ -280,7 +280,7 @@ export default function HowItWorksPage() {
                   <div className="md:w-1/2 bg-white p-4 rounded-xl shadow-md">
                     <div className="aspect-video relative bg-gray-100 rounded-lg overflow-hidden">
                       <Image
-                        src="/placeholder.svg?height=400&width=600"
+                        src="/growthprediction.jpg"
                         alt="Growth Analytics"
                         fill
                         className="object-cover"
@@ -316,7 +316,7 @@ export default function HowItWorksPage() {
                   <div className="md:w-1/2 bg-white p-4 rounded-xl shadow-md">
                     <div className="aspect-video relative bg-gray-100 rounded-lg overflow-hidden">
                       <Image
-                        src="/placeholder.svg?height=400&width=600"
+                        src="/startupdashboard1.jpg"
                         alt="Startup Management"
                         fill
                         className="object-cover"
@@ -356,7 +356,7 @@ export default function HowItWorksPage() {
                   <div className="md:w-1/2 bg-white p-4 rounded-xl shadow-md">
                     <div className="aspect-video relative bg-gray-100 rounded-lg overflow-hidden">
                       <Image
-                        src="/placeholder.svg?height=400&width=600"
+                        src="/investordashboard.jpg"
                         alt="Browse Startups"
                         fill
                         className="object-cover"
@@ -392,7 +392,7 @@ export default function HowItWorksPage() {
                   <div className="md:w-1/2 bg-white p-4 rounded-xl shadow-md">
                     <div className="aspect-video relative bg-gray-100 rounded-lg overflow-hidden">
                       <Image
-                        src="/placeholder.svg?height=400&width=600"
+                        src="/searchandfilter.jpg"
                         alt="Search and Filter"
                         fill
                         className="object-cover"
@@ -428,7 +428,7 @@ export default function HowItWorksPage() {
                   <div className="md:w-1/2 bg-white p-4 rounded-xl shadow-md">
                     <div className="aspect-video relative bg-gray-100 rounded-lg overflow-hidden">
                       <Image
-                        src="/placeholder.svg?height=400&width=600"
+                        src="/invest.jpg"
                         alt="Invest in Startups"
                         fill
                         className="object-cover"
@@ -464,7 +464,7 @@ export default function HowItWorksPage() {
                   <div className="md:w-1/2 bg-white p-4 rounded-xl shadow-md">
                     <div className="aspect-video relative bg-gray-100 rounded-lg overflow-hidden">
                       <Image
-                        src="/placeholder.svg?height=400&width=600"
+                        src="/investmentportfolio.jpg"
                         alt="Portfolio Tracking"
                         fill
                         className="object-cover"
@@ -519,7 +519,7 @@ export default function HowItWorksPage() {
               <div className="md:w-1/2 bg-white p-4 rounded-xl shadow-md">
                 <div className="aspect-video relative bg-gray-100 rounded-lg overflow-hidden">
                   <Image
-                    src="/placeholder.svg?height=400&width=600"
+                    src="/profile.jpg"
                     alt="Profile Management"
                     fill
                     className="object-cover"
