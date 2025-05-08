@@ -79,7 +79,7 @@ export default function LandingPage() {
               </div>
               <div className="relative h-[400px] lg:h-[600px] rounded-xl overflow-hidden shadow-xl">
                 <Image
-                  src="/placeholder.svg?height=600&width=800"
+                  src="/home.png"
                   alt="VentureWise Dashboard"
                   fill
                   className="object-cover"

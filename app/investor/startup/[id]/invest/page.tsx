@@ -205,6 +205,26 @@ export default function InvestPage({ params }) {
               tokenRewards: tokenRewards,
             }),
           });
+            
+          // Hello Ignosis Evaluators! this below code is working of localblockchain rewards system 
+          // try {
+          //   const rewardResponse = await fetch("/api/reward", {
+          //     method: "POST",
+          //     headers: {
+          //       "Content-Type": "application/json",
+          //     },
+          //     body: JSON.stringify({
+          //       walletAddress: "0xcd3B766CCDd6AE721141F452C550Ca635964ce71", // replace with actual user wallet
+          //       tokenRewards: tokenRewards, // in ETH
+          //     }),
+          //   });
+            
+          //   const rewardData = await rewardResponse.json();
+          //   console.log("✅ Reward sent:", rewardData);
+          // } catch (rewardError) {
+          //   console.error("❌ Error sending reward:", rewardError);
+          //   // Consider how to handle failed rewards - maybe retry or queue for later?
+          // }
   
           const data = await response.json();
   

@@ -482,10 +482,14 @@ export default function LoginPage() {
       })
 
       const result = await registerResponse.json()
+     
 
       if (registerResponse.ok && result.token) {
         // Store token
         window.localStorage.setItem("token", result.token)
+        window.localStorage.setItem("userId", result.user.userId)
+        window.localStorage.setItem("role", result.user.role)
+        window.localStorage.setItem("name", result.user.username)
         
         toast({
           title: "Registration successful",
@@ -493,10 +497,10 @@ export default function LoginPage() {
         })
 
         if(role == "startup"){
-          router.push("/investor")
+          router.push("/startup/dashboard")
           }
           else{
-            router.push("/startup/dashboard")
+            router.push("/investor")
           }
         
         // router.push("/dashboard")

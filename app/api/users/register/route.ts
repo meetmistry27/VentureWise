@@ -184,6 +184,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       token,
       user: {
+        userId: newUser.userId,
         username: newUser.username,
         email: newUser.email,
         role: newUser.role,

@@ -155,12 +155,12 @@ export default function HowItWorksPage() {
                     <ul className="space-y-2">
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-5 w-5 text-emerald-600 mt-0.5 flex-shrink-0" />
-                        <span>Enter your startup details including name, industry, and location</span>
+                        <span>Enter your startup details including name, tagline, description</span>
                       </li>
-                      <li className="flex items-start gap-2">
+                      {/* <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-5 w-5 text-emerald-600 mt-0.5 flex-shrink-0" />
-                        <span>Upload your logo and pitch deck</span>
-                      </li>
+                        <span>Upload your</span>
+                      </li> */}
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-5 w-5 text-emerald-600 mt-0.5 flex-shrink-0" />
                         <span>Set your funding goals and timeline</span>
@@ -170,7 +170,7 @@ export default function HowItWorksPage() {
                   <div className="md:w-1/2 bg-white p-4 rounded-xl shadow-md">
                     <div className="aspect-video relative bg-gray-100 rounded-lg overflow-hidden">
                       <Image
-                        src="/placeholder.svg?height=400&width=600"
+                        src="/createstartup.jpg"
                         alt="Create Startup Form"
                         fill
                         className="object-cover"
@@ -207,7 +207,7 @@ export default function HowItWorksPage() {
                   <div className="md:w-1/2 bg-white p-4 rounded-xl shadow-md">
                     <div className="aspect-video relative bg-gray-100 rounded-lg overflow-hidden">
                       <Image
-                        src="/placeholder.svg?height=400&width=600"
+                        src="/startupdashboard1.jpg"
                         alt="Startup Dashboard"
                         fill
                         className="object-cover"

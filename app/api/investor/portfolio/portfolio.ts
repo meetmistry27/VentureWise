@@ -11,7 +11,7 @@ console.log(userId)
     const investments = await Investment.find({ investor: userId })
       .populate("startup", "name industry")
       .sort({ createdAt: -1 }); // Newest investments first
-console.log("aa jo investments" + investments)
+  //console.log("aa jo investments" + investments)
     return investments;
   } catch (error) {
     console.error("Error in getInvestmentsByInvestorId:", error);

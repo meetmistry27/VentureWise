@@ -19,8 +19,8 @@ export async function GET(req: NextRequest) {
     
 
     const investments = await getInvestmentsByInvestorId(userId)
-    console.log("From Bsckend route.ts")
-    console.log(investments)
+    //console.log("From Bsckend route.ts")
+    //console.log(investments)
     return NextResponse.json(investments)
   } catch (error) {
     console.error("[PORTFOLIO_GET]", error)

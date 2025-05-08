@@ -33,7 +33,6 @@ import { InvestorHeader } from "@/components/investor-header"
 import { StartupCard } from "@/components/startup-card"
 import { FeaturedStartup } from "@/components/featured-startup"
 import { InvestorFooter } from "@/components/investor-footer"
-
 export default function InvestorDashboard() {
   const [startups, setStartups] = useState([]);
   const [filteredStartups, setFilteredStartups] = useState([]);

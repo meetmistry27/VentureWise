@@ -69,9 +69,9 @@ export default function PortfolioPage() {
               Authorization: `Bearer ${token} ${userId}`,
             }
         });
-        console.log(response)
+        //console.log(response)
         const data = await response.json();
-        console.log(data)
+        //console.log(data)
 
         // Sort investments by date (newest first by default)
         const sortedInvestments = data.sort((a, b) => {
