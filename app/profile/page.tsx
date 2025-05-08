@@ -19,7 +19,7 @@ import { StartupHeader } from "@/components/startup-header.tsx"
 import { InvestorHeader } from "@/components/investor-header.tsx"
 
 export default function ProfilePage() {
-  //const { user, loading: authLoading, refreshUser } = useAuth()
+  const { user, loading: authLoading, refreshUser } = useAuth()
   const router = useRouter()
 
   const [isEditing, setIsEditing] = useState(false)
@@ -37,17 +37,17 @@ export default function ProfilePage() {
   useEffect(() => {
     const fetchUserProfile = async () => {
       //If user is already available from auth context, use that data
-      // if (user) {
-      //   setFormData({
-      //     name: user.username || "",
-      //     email: user.email || "",
-      //     phoneNumber: user.phoneNumber || "",
-      //     location: user.location || "",
-      //     bio: user.bio || "",
-      //     profileImage: user.profileImage || "/placeholder.svg?height=200&width=200",
-      //   })
-      //   return
-      // }
+      if (user) {
+        setFormData({
+          name: user.username || "",
+          email: user.email || "",
+          phoneNumber: user.phoneNumber || "",
+          location: user.location || "",
+          bio: user.bio || "",
+          profileImage: user.profileImage || "/placeholder.svg?height=200&width=200",
+        })
+        return
+      }
 
       //If not, try to fetch the profile directly from API
       try {
@@ -92,15 +92,15 @@ export default function ProfilePage() {
         })
       } catch (error) {
         console.error("Failed to fetch profile:", error)
-        // If we can't fetch the profile and there's no user, redirect to login
-        // if (!authLoading && !user) {
-        //   router.push("/login")
-        // }
+        //If we can't fetch the profile and there's no user, redirect to login
+        if (!authLoading && !user) {
+          router.push("/login")
+        }
       }
     }
 
     fetchUserProfile()
-  }, [router])
+  }, [user, router])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
