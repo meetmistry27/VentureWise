@@ -29,12 +29,19 @@ export default function LandingPage() {
               Testimonials
             </Link> */}
           </nav>
+          
           <div className="flex items-center gap-4">
             <Link href="/login">
               <Button variant="outline" className="hidden sm:flex">
                 Get Started
               </Button>
             </Link>
+            <Link href="/how-it-works">
+              <Button variant="outline" className="hidden sm:flex">
+                How It Works
+              </Button>
+            </Link>
+            
             {/* <Link href="/assessment">
               <Button className="bg-emerald-600 hover:bg-emerald-700">Try Assessment</Button>
             </Link> */}

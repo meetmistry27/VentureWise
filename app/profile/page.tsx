@@ -15,6 +15,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Separator } from "@/components/ui/separator"
 import { toast } from "@/components/ui/use-toast"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { StartupHeader } from "@/components/startup-header.tsx" 
+import { InvestorHeader } from "@/components/investor-header.tsx"
 
 export default function ProfilePage() {
   const { user, loading: authLoading, refreshUser } = useAuth()
@@ -185,7 +187,10 @@ export default function ProfilePage() {
   }
 
   return (
+    <div>
+      {formData.role === "startup" ? <StartupHeader /> : <InvestorHeader/>}
     <div className="container mx-auto py-10 px-4 md:px-6">
+      
       <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">My Profile</h1>
@@ -466,6 +471,7 @@ export default function ProfilePage() {
           </Card>
         </div>
       )}
+    </div>
     </div>
   )
 }

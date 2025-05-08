@@ -180,7 +180,7 @@ export default function InvestPage({ params }) {
   
           const token = localStorage.getItem("token");
           const userId = localStorage.getItem("userId");
-  
+          
           if (!token) {
             setError("Authentication token not found. Please log in again.");
             setIsLoading(false);
@@ -191,7 +191,8 @@ export default function InvestPage({ params }) {
             });
             return;
           }
-  
+          console.log(token)
+          console.log(userId)
           const response = await fetch(`/api/investor/startup/${id}/invest`, {
             method: "POST",
             headers: {
@@ -210,9 +211,13 @@ export default function InvestPage({ params }) {
           if (!response.ok || !data.success) {
             throw new Error(data.message || "Investment failed.");
           }
-  
+
           setInvestmentId(data.investment._id);
-  
+          if (data.redirectUrl) {
+            router.push(data.redirectUrl);
+          }
+
+          //router.push('/investor/portfolio');
           toast({
             title: "Investment Created",
             description: "Your investment has been created and is being processed.",
@@ -252,9 +257,7 @@ export default function InvestPage({ params }) {
     return projectedReturn ? investmentAmount * projectedReturn.multiplier : investmentAmount
   }
 
-  
-
- console.log(startup);
+console.log(startup);
 
   if (error) {
     return (

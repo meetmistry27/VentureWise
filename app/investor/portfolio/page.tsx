@@ -486,9 +486,9 @@ export default function PortfolioPage() {
                               >
                                 {investment.startup?.riskAssessment?.riskLevel || "Moderate Risk"}
                               </Badge>
-                              <span className="text-sm">
+                              {/* <span className="text-sm">
                                 {investment.startup?.riskAssessment?.riskScore || "65"}/100
-                              </span>
+                              </span> */}
                             </div>
                           </div>
 

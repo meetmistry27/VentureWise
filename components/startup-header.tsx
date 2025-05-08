@@ -38,19 +38,27 @@ const { user, logout } = useAuth()
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
+        <Link href = "/startup/dashboard">
         <div className="flex items-center gap-2">
           <TrendingUp className="h-6 w-6 text-emerald-600" />
           <span className="text-xl font-bold">VentureWise</span>
         </div>
+        </Link>
 
         <nav className="hidden md:flex items-center gap-6">
           <Link href="/startup/dashboard" className="text-sm font-medium text-emerald-600">
             Dashboard
           </Link>
+          <Link href="/profile" className="text-sm font-medium hover:text-emerald-600 transition-colors">
+            Profile
+          </Link>
+          <Link href="/startup/about" className="text-sm font-medium hover:text-emerald-600 transition-colors">
+            How It Works
+          </Link>
           {/* <Link href="/startup/create" className="text-sm font-medium hover:text-emerald-600 transition-colors">
             Create Startup
           </Link> */}
-          <Link href="/startup/investors" className="text-sm font-medium hover:text-emerald-600 transition-colors">
+          {/* <Link href="/startup/investors" className="text-sm font-medium hover:text-emerald-600 transition-colors">
             Investors
           </Link>
           <Link href="/startup/updates" className="text-sm font-medium hover:text-emerald-600 transition-colors">
@@ -58,7 +66,7 @@ const { user, logout } = useAuth()
           </Link>
           <Link href="/startup/settings" className="text-sm font-medium hover:text-emerald-600 transition-colors">
             Settings
-          </Link>
+          </Link> */}
         </nav>
 
         <div className="flex items-center gap-4">
@@ -70,7 +78,18 @@ const { user, logout } = useAuth()
               </Badge>
             </Button> */}
 
-            <DropdownMenu>
+<div className="flex items-center gap-4">
+  {/* <Link href="/profile">
+    <Button variant="outline" className="text-sm font-medium">
+      Profile
+    </Button>
+  </Link> */} 
+  <Button variant="destructive" onClick={handleLogout} className="bg-emerald-600 hover:bg-emerald-700">
+    Logout
+  </Button>
+</div>
+
+            {/* <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="flex items-center gap-2">
                   <Avatar className="h-8 w-8">
@@ -79,7 +98,7 @@ const { user, logout } = useAuth()
                   </Avatar>
                   <span className="text-sm font-medium">{localStorage.getItem("name") || "Startup User"}</span>
                   {/* <span className="text-sm font-medium">{user?.name || "Startup User"}</span> */}
-                  <ChevronDown className="h-4 w-4" />
+                  {/* <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -89,7 +108,7 @@ const { user, logout } = useAuth()
                   <Link href="/profile" className="flex w-full">
                     Profile
                   </Link>
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
                 {/* <DropdownMenuItem>
                   <Link href="/startup/dashboard" className="flex w-full">
                     Dashboard
@@ -100,10 +119,10 @@ const { user, logout } = useAuth()
                     Settings
                   </Link> */}
                 {/* </DropdownMenuItem> */}
-                <DropdownMenuSeparator />
+                {/* <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
               </DropdownMenuContent>
-            </DropdownMenu>
+            </DropdownMenu> */}
 
             {/* <Button className="bg-emerald-600 hover:bg-emerald-700">
               <Link href="/startup/create">Create Startup</Link>
@@ -134,10 +153,13 @@ const { user, logout } = useAuth()
                   <Link href="/startup/dashboard" className="text-sm font-medium text-emerald-600">
                     Dashboard
                   </Link>
-                  <Link href="/startup/create" className="text-sm font-medium">
-                    Create Startup
+                  <Link href="/profile" className="text-sm font-medium text-emerald-600">
+                    Profile
                   </Link>
-                  <Link href="/startup/investors" className="text-sm font-medium">
+                  {/* <Link href="/startup/create" className="text-sm font-medium">
+                    Create Startup
+                  </Link> */}
+                  {/* <Link href="/startup/investors" className="text-sm font-medium">
                     Investors
                   </Link>
                   <Link href="/startup/updates" className="text-sm font-medium">
@@ -145,7 +167,7 @@ const { user, logout } = useAuth()
                   </Link>
                   <Link href="/startup/settings" className="text-sm font-medium">
                     Settings
-                  </Link>
+                  </Link> */}
                 </nav>
 
                 <div className="flex flex-col gap-2">

@@ -34,14 +34,15 @@ function toCamelCase(obj: any) {
 }
 
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     await dbConnect();
 
     const startupId = params.id;
+    console.log(" ihih" + startupId)
     const rawData = await req.json();
     const updatedData = toCamelCase(rawData);
-    console.log(updatedData);
+    console.log("meet " + JSON.stringify(updatedData, null, 2));
 
     updatedData.pilotPartnerships = updatedData.pilotPartnerships ? "TRUE" : "FALSE";
 
@@ -51,6 +52,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
       { new: true, runValidators: true }
     );
 
+    console.log("wererfs")
     if (!updatedStartup) {
       return NextResponse.json({ message: 'Startup not found' }, { status: 404 });
     }

@@ -14,8 +14,22 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
+import { useRouter } from "next/navigation"
 
 export function InvestorHeader() {
+  const router = useRouter();
+  const handleLogout = async () => {
+    try {
+      window.localStorage.removeItem("userId")
+      window.localStorage.removeItem("token")
+      window.localStorage.removeItem("role")
+      window.localStorage.removeItem("name")
+      router.push("/login")
+    } catch (error) {
+      console.error("Logout failed:", error)
+    }
+  }
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
@@ -28,30 +42,36 @@ export function InvestorHeader() {
           <Link href="/investor" className="text-sm font-medium text-emerald-600">
             Dashboard
           </Link>
-          <Link href="/investor/opportunities" className="text-sm font-medium hover:text-emerald-600 transition-colors">
+          {/* <Link href="/investor/opportunities" className="text-sm font-medium hover:text-emerald-600 transition-colors">
             Opportunities
-          </Link>
+          </Link> */}
           <Link href="/investor/portfolio" className="text-sm font-medium hover:text-emerald-600 transition-colors">
             Portfolio
           </Link>
-          <Link href="/investor/insights" className="text-sm font-medium hover:text-emerald-600 transition-colors">
+          <Link href="/profile" className="text-sm font-medium hover:text-emerald-600 transition-colors">
+            Profile
+          </Link>
+          <Link href="/investor/about" className="text-sm font-medium hover:text-emerald-600 transition-colors">
+            How It Works
+          </Link>
+          {/* <Link href="/investor/insights" className="text-sm font-medium hover:text-emerald-600 transition-colors">
             Insights
           </Link>
           <Link href="/investor/events" className="text-sm font-medium hover:text-emerald-600 transition-colors">
             Events
-          </Link>
+          </Link> */}
         </nav>
 
         <div className="flex items-center gap-4">
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="relative">
+            {/* <Button variant="ghost" size="icon" className="relative">
               <Bell className="h-5 w-5" />
               <Badge className="absolute -top-1 -right-1 h-5 w-5 p-0 flex items-center justify-center bg-emerald-600">
                 3
               </Badge>
-            </Button>
+            </Button> */}
 
-            <DropdownMenu>
+            {/* <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="flex items-center gap-2">
                   <Avatar className="h-8 w-8">
@@ -71,9 +91,14 @@ export function InvestorHeader() {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Logout</DropdownMenuItem>
               </DropdownMenuContent>
-            </DropdownMenu>
+            </DropdownMenu> */}
 
-            <Button className="bg-emerald-600 hover:bg-emerald-700">Add Funds</Button>
+<Button variant="destructive" onClick={handleLogout} className="bg-emerald-600 hover:bg-emerald-700">
+    Logout
+  </Button>
+            {/* <Button className="bg-emerald-600 hover:bg-emerald-700">Logout
+
+            </Button> */}
           </div>
 
           <Sheet>

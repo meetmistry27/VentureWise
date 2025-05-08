@@ -25,6 +25,8 @@ export default function StartupDashboard() {
   const { user } = useAuth()
   const { toast } = useToast()
   const router = useRouter()
+  const [refresh, setRefresh] = useState(false)
+
 
   
   useEffect(() => {
@@ -67,7 +69,7 @@ export default function StartupDashboard() {
   //   } else {
   //     setLoading(false)
   //   }
-  }, [user, toast])
+  }, [user, toast, refresh])
 
   const handleCreateStartup = () => {
     router.push("/startup/create")
@@ -77,16 +79,38 @@ export default function StartupDashboard() {
   const mockFundingStats = {
     totalRaised: startups.reduce((sum, startup) => sum + (startup.fundingRaised || 0), 0),
     totalGoal: startups.reduce((sum, startup) => sum + (startup.fundingGoal || 0), 0),
-    totalInvestors: startups.reduce((sum, startup) => sum + (startup.investors || 0), 0),
+    totalInvestors: startups.reduce((sum, startup) => sum + (startup.investorsCount || 0), 0),
     averageInvestment:
       startups.length > 0
         ? Math.round(
             startups.reduce((sum, startup) => sum + (startup.fundingRaised || 0), 0) /
-              startups.reduce((sum, startup) => sum + (startup.investors || 0), 1),
+              startups.reduce((sum, startup) => sum + (startup.investorsCount || 0), 1),
           )
         : 0,
   }
 
+  const handleDelist = async (startupId) => {
+    try {
+      const res = await fetch(`/api/startups/by-id/${startupId}/status`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'Closed' }),
+      });
+  
+      if (!res.ok) throw new Error('Failed to update startup status');
+  
+      const data = await res.json();
+      console.log('Startup status updated:', data);
+      setRefresh(prev => !prev)
+      // Optionally refresh UI or show toast
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+  
+  
   // Mock monthly trend data
   const mockMonthlyTrend = [
     { month: "Jan", amount: 0 },
@@ -244,7 +268,8 @@ export default function StartupDashboard() {
                                 : "bg-amber-100 text-amber-800"
                             }
                           >
-                            {startup.status === "active" ? "Active Campaign" : "Draft"}
+                            { startup.status }
+                            {/* {startup.status === "active" ? "Active Campaign" : "Draft"} */}
                           </Badge>
                         </div>
 
@@ -258,7 +283,7 @@ export default function StartupDashboard() {
                           </div>
                           <Progress value={(startup.fundingRaised / startup.fundingGoal) * 100 || 0} className="h-2" />
                           <div className="flex justify-between text-xs text-gray-500 mt-1">
-                            <span>{startup.investors || 0} investors</span>
+                            <span>{startup.investorsCount || 0} investors</span>
                             <span>{startup.daysLeft || 30} days left</span>
                           </div>
                         </div>
@@ -394,7 +419,8 @@ export default function StartupDashboard() {
                               : "bg-amber-100 text-amber-800"
                         }
                       >
-                        {startup.status === "active" ? "Active" : startup.status === "funded" ? "Funded" : "Draft"}
+                        { startup.status }
+                        {/* {startup.status} === "active" ? "Active" : startup.status === "funded" ? "Funded" : "Draft"} */}
                       </Badge>
                     </CardHeader>
                     <CardContent className="pb-2">
@@ -419,7 +445,7 @@ export default function StartupDashboard() {
                         <div className="grid grid-cols-2 gap-2 text-sm">
                           <div className="bg-gray-50 p-2 rounded-md">
                             <div className="text-xs text-gray-500">Investors</div>
-                            <div className="font-medium">{startup.investors || 0}</div>
+                            <div className="font-medium">{startup.investorsCount || 0}</div>
                           </div>
                           {/* <div className="bg-gray-50 p-2 rounded-md">
                             <div className="text-xs text-gray-500">Risk Score</div>
@@ -436,12 +462,20 @@ export default function StartupDashboard() {
                       <Link href={`/analytics/${startup.name}`}>
                         <Button variant="outline">Analytics</Button>
                       </Link>
-                      <Link href={`/startup/edit/${startup._id}`}>
-                        <Button className="bg-emerald-600 hover:bg-emerald-700 flex items-center gap-1">
-                          <Edit className="h-4 w-4" />
-                          Edit
-                        </Button>
-                      </Link>
+                      <div className="flex items-center gap-2">
+  <Link href={`/startup/edit/${startup._id}`}>
+    <Button className="bg-emerald-600 hover:bg-emerald-700 flex items-center gap-1">
+      <Edit className="h-4 w-4" />
+      Edit
+    </Button>
+  </Link>
+  <Button onClick={() => handleDelist(startup._id)} className="bg-red-600 hover:bg-red-700 flex items-center gap-1">
+  Delist
+</Button>
+
+</div>
+
+
                     </CardFooter>
                   </Card>
                 ))}

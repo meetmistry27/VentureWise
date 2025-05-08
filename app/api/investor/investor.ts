@@ -7,7 +7,7 @@ export async function getAllStartups() {
   try {
     await dbConnect(); // Connect to MongoDB using shared utility
 
-    const startups = await Startup.find({});
+    const startups = await Startup.find({ status: "active" });
     console.log(startups);
     return new Response(JSON.stringify(startups), { status: 200 });
   } catch (error) {

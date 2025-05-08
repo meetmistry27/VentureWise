@@ -110,7 +110,7 @@ export default function StartupGrowthCharts({ params }) {
 
   
         // 2. Send startup data to prediction API
-        const predictRes = await fetch('http://127.0.0.1:5001/api/predict', {
+        const predictRes = await fetch('https://startupgrowthpred.onrender.com/api/predict', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -123,9 +123,11 @@ export default function StartupGrowthCharts({ params }) {
         if (predictJson.status !== 'success') {
           throw new Error(predictJson.message || 'Prediction failed');
         }
-  
+        
+        console.log(predictJson)
         // 3. Update state with growth data
         setGrowthData(predictJson);
+        // console.log(growthData)
       } catch (err) {
         setError(err.message);
       } finally {
@@ -226,7 +228,7 @@ export default function StartupGrowthCharts({ params }) {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8 text-center">
-        {growthData.startup_name} - 5 Year Growth Projection
+        {name} - 5 Year Growth Projection
       </h1>
       
       <div className="bg-gray-50 p-6 mb-8 rounded-lg shadow">
@@ -254,7 +256,7 @@ export default function StartupGrowthCharts({ params }) {
           </div>
           <div>
             <p className="text-gray-600">Current Monthly Revenue</p>
-            <p className="font-medium">{formatCurrency(details.revenue_last_month)}</p>
+            <p className="font-medium">{formatCurrency(details.revenue_last_month) + " Lakhs"}</p>
           </div>
         </div>
       </div>

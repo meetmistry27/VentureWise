@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   ArrowUpRight,
   BarChart3,
@@ -33,228 +33,89 @@ import { InvestorHeader } from "@/components/investor-header"
 import { StartupCard } from "@/components/startup-card"
 import { FeaturedStartup } from "@/components/featured-startup"
 import { InvestorFooter } from "@/components/investor-footer"
-import { useEffect } from "react"
 
 export default function InvestorDashboard() {
-  const [activeFilter, setActiveFilter] = useState("all")
-
-  // Mock data for startups
-  // const featuredStartup = {
-  //   id: "1",
-  //   name: "MediConnect",
-  //   tagline: "AI-powered healthcare platform connecting patients with specialists",
-  //   logo: "/placeholder.svg?height=80&width=80",
-  //   industry: "Healthtech",
-  //   location: "Bangalore",
-  //   fundingGoal: 5000000,
-  //   fundingRaised: 3750000,
-  //   riskLevel: "Low Risk",
-  //   riskScore: 82,
-  //   daysLeft: 15,
-  //   traction: "20,000+ monthly active users",
-  //   growth: "+45% MoM",
-  //   team: 12,
-  //   description:
-  //     "MediConnect is revolutionizing healthcare access in India by connecting patients with specialists through an AI-powered platform that provides accurate diagnoses and treatment recommendations.",
-  //   highlights: [
-  //     "Partnerships with 200+ hospitals",
-  //     "45% month-over-month growth",
-  //     "Featured in YourStory's Top 10 Healthtech Startups",
-  //   ],
-  //   investors: 48,
-  //   minInvestment: 10000,
-  // }
-
-  // const startups = [
-  //   {
-  //     id: "2",
-  //     name: "FinEase",
-  //     tagline: "Simplified financial management for small businesses",
-  //     logo: "/placeholder.svg?height=80&width=80",
-  //     industry: "Fintech",
-  //     location: "Mumbai",
-  //     fundingGoal: 3000000,
-  //     fundingRaised: 1200000,
-  //     riskLevel: "Moderate Risk",
-  //     riskScore: 65,
-  //     daysLeft: 22,
-  //     traction: "5,000+ businesses onboarded",
-  //     growth: "+28% MoM",
-  //     team: 8,
-  //     minInvestment: 5000,
-  //   },
-  //   {
-  //     id: "3",
-  //     name: "EduSpark",
-  //     tagline: "Personalized learning paths for K-12 students",
-  //     logo: "/placeholder.svg?height=80&width=80",
-  //     industry: "Edtech",
-  //     location: "Delhi",
-  //     fundingGoal: 2500000,
-  //     fundingRaised: 1800000,
-  //     riskLevel: "Low Risk",
-  //     riskScore: 78,
-  //     daysLeft: 18,
-  //     traction: "15,000+ active students",
-  //     growth: "+35% MoM",
-  //     team: 10,
-  //     minInvestment: 7500,
-  //   },
-  //   {
-  //     id: "4",
-  //     name: "GreenHarvest",
-  //     tagline: "Smart farming solutions for urban areas",
-  //     logo: "/placeholder.svg?height=80&width=80",
-  //     industry: "AgriTech",
-  //     location: "Pune",
-  //     fundingGoal: 4000000,
-  //     fundingRaised: 2500000,
-  //     riskLevel: "Low Risk",
-  //     riskScore: 75,
-  //     daysLeft: 12,
-  //     traction: "100+ urban farms deployed",
-  //     growth: "+22% MoM",
-  //     team: 15,
-  //     minInvestment: 15000,
-  //   },
-  //   {
-  //     id: "5",
-  //     name: "QuickCommerce",
-  //     tagline: "10-minute delivery for local businesses",
-  //     logo: "/placeholder.svg?height=80&width=80",
-  //     industry: "E-commerce",
-  //     location: "Bangalore",
-  //     fundingGoal: 6000000,
-  //     fundingRaised: 1500000,
-  //     riskLevel: "Moderate Risk",
-  //     riskScore: 62,
-  //     daysLeft: 30,
-  //     traction: "50,000+ monthly orders",
-  //     growth: "+60% MoM",
-  //     team: 25,
-  //     minInvestment: 20000,
-  //   },
-  //   {
-  //     id: "6",
-  //     name: "SecureChain",
-  //     tagline: "Blockchain security for enterprise applications",
-  //     logo: "/placeholder.svg?height=80&width=80",
-  //     industry: "Cybersecurity",
-  //     location: "Hyderabad",
-  //     fundingGoal: 3500000,
-  //     fundingRaised: 2800000,
-  //     riskLevel: "Low Risk",
-  //     riskScore: 80,
-  //     daysLeft: 8,
-  //     traction: "20+ enterprise clients",
-  //     growth: "+18% MoM",
-  //     team: 12,
-  //     minInvestment: 25000,
-  //   },
-  // ]
-
-  // // Mock data for portfolio
-  // const portfolioStats = {
-  //   totalInvested: 1250000,
-  //   activeInvestments: 8,
-  //   averageReturn: 18.5,
-  //   pendingOpportunities: 3,
-  // }
-
-  // const portfolioInvestments = [
-  //   {
-  //     id: "p1",
-  //     name: "TechSolutions",
-  //     logo: "/placeholder.svg?height=60&width=60",
-  //     invested: 200000,
-  //     currentValue: 260000,
-  //     returnPercentage: 30,
-  //     date: "2023-10-15",
-  //   },
-  //   {
-  //     id: "p2",
-  //     name: "HealthAI",
-  //     logo: "/placeholder.svg?height=60&width=60",
-  //     invested: 150000,
-  //     currentValue: 187500,
-  //     returnPercentage: 25,
-  //     date: "2023-11-20",
-  //   },
-  //   {
-  //     id: "p3",
-  //     name: "EcoEnergy",
-  //     logo: "/placeholder.svg?height=60&width=60",
-  //     invested: 300000,
-  //     currentValue: 330000,
-  //     returnPercentage: 10,
-  //     date: "2024-01-05",
-  //   },
-  // ]
-
-  // Definition of a startup object structure
-const Startup = {
-  id: String,              // Unique identifier
-  name: String,            // Company name
-  tagline: String,         // Brief description of value proposition
-  logo: String,            // URL path to logo image
-  industry: String,        // Industry category
-  location: String,        // City/region
-  fundingGoal: Number,     // Total funding amount targeted (in currency)
-  fundingRaised: Number,   // Current amount raised (in currency)
-  riskLevel: String,       // Risk assessment label
-  riskScore: Number,       // Numerical risk assessment (0-100)
-  daysLeft: Number,        // Days remaining in funding round
-  monthlyActiveUsers: String,        // Current user/customer metrics
-  growth: String,          // Growth rate
-  teamSize: Number,            // Team size
-  minInvestment: Number,   // Minimum investment amount
-  description: String,     // Detailed company description (optional)
-  highlights: Array,       // List of key achievements (optional)
-  investors: Number        // Number of current investors (optional)
- };
-
- const [startups, setStartups] = useState([]);
- useEffect(() => {
-  async function fetchAllStartups() {
-    try {
-      const response = await fetch('/api/investor');
-      const data = await response.json();
-      setStartups(data);
-    } catch (error) {
-      console.error('Error fetching startups:', error);
-    }
-  }
-
-  fetchAllStartups();
-}, []);
-
-
-  //const startups = fetchAllStartups();
-  console.log(startups)
+  const [startups, setStartups] = useState([]);
+  const [filteredStartups, setFilteredStartups] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedIndustry, setSelectedIndustry] = useState("All Industries");
-  //const [activeFilter, setActiveFilter] = useState("all");
+  const [riskFilter, setRiskFilter] = useState("all");
+  const [industryFilter, setIndustryFilter] = useState("all");
+  const [sortOption, setSortOption] = useState("");
+  
+  // Fetch all startups on component mount
+  useEffect(() => {
+    async function fetchAllStartups() {
+      try {
+        const response = await fetch('/api/investor');
+        const data = await response.json();
+        setStartups(data);
+        setFilteredStartups(data);
+      } catch (error) {
+        console.error('Error fetching startups:', error);
+      }
+    }
 
+    fetchAllStartups();
+  }, []);
 
-  //Filter startups based on active filter
-  const filteredStartups = startups.filter((startup) => {
-    const matchesRiskLevel =
-      activeFilter === "all" ||
-      (activeFilter === "low" && startup.riskLevel === "Low Risk") ||
-      (activeFilter === "moderate" && startup.riskLevel === "Moderate Risk");
-  
-    const matchesSearch =
-      !searchQuery ||
-      startup.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      startup.industry.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      startup.location.toLowerCase().includes(searchQuery.toLowerCase());
-  
-    const matchesIndustry =
-      selectedIndustry === "All Industries" || !selectedIndustry || startup.industry === selectedIndustry;
-  
-    return matchesRiskLevel && matchesSearch && matchesIndustry;
-  });
-  
+  // Apply filters whenever any filter changes
+  useEffect(() => {
+    let result = [...startups];
+    
+    // Apply search filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter(startup => 
+        startup.name?.toLowerCase().includes(query) || 
+        startup.industry?.toLowerCase().includes(query) || 
+        startup.location?.toLowerCase().includes(query)
+      );
+    }
+    
+    // Apply risk filter
+    if (riskFilter !== "all") {
+      result = result.filter(startup => {
+        if (riskFilter === "low") return startup.riskAssessment.riskLevel === "Low Risk";
+        if (riskFilter === "moderate") return startup.riskAssessment.riskLevel === "Moderate Risk";
+        if (riskFilter === "high") return startup.riskAssessment.riskLevel === "High Risk";
+        return true;
+      });
+    }
+    
+    // Apply industry filter
+    if (industryFilter !== "all") {
+      result = result.filter(startup => 
+        startup.industry === industryFilter
+      );
+    }
+    
+    // Apply sorting
+    if (sortOption === "fundingLowToHigh") {
+      result.sort((a, b) => a.fundingGoal - b.fundingGoal);
+    } else if (sortOption === "fundingHighToLow") {
+      result.sort((a, b) => b.fundingGoal - a.fundingGoal);
+    } else if (sortOption === "daysLeft") {
+      result.sort((a, b) => a.daysLeft - b.daysLeft);
+    }
+    
+    setFilteredStartups(result);
+  }, [searchQuery, riskFilter, industryFilter, sortOption, startups]);
+
+  // Get unique industries for the industry dropdown
+  const uniqueIndustries = [...new Set(startups.map(startup => startup.industry))].filter(Boolean);
+
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Handle filter reset
+  const resetFilters = () => {
+    setSearchQuery("");
+    setRiskFilter("all");
+    setIndustryFilter("all");
+    setSortOption("");
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
@@ -273,12 +134,12 @@ const Startup = {
                   VentureWise uses AI-powered risk assessment to identify promising startups. Invest with confidence
                   starting from just ₹5,000.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
+                {/* <div className="flex flex-col sm:flex-row gap-4">
                   <Button className="bg-white text-emerald-700 hover:bg-emerald-50">Browse Opportunities</Button>
                   <Button variant="outline" className="text-white border-white hover:bg-emerald-500">
                     How It Works
                   </Button>
-                </div>
+                </div> */}
               </div>
               <div className="relative p-6 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 shadow-xl">
                 <div className="space-y-4">
@@ -292,27 +153,27 @@ const Startup = {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="bg-white/20 p-4 rounded-lg">
                       <div className="text-sm text-emerald-100">Available Startups</div>
-                      <div className="text-3xl font-bold">42</div>
-                      <div className="text-xs text-emerald-100 flex items-center gap-1 mt-1">
+                      <div className="text-3xl font-bold">{startups.length || 0}</div>
+                      {/* <div className="text-xs text-emerald-100 flex items-center gap-1 mt-1">
                         <TrendingUp className="h-3 w-3" /> +12 this month
-                      </div>
+                      </div> */}
                     </div>
-                    <div className="bg-white/20 p-4 rounded-lg">
+                    {/* <div className="bg-white/20 p-4 rounded-lg">
                       <div className="text-sm text-emerald-100">Avg. Return</div>
                       <div className="text-3xl font-bold">24%</div>
                       <div className="text-xs text-emerald-100 flex items-center gap-1 mt-1">
                         <TrendingUp className="h-3 w-3" /> +3% from last quarter
                       </div>
-                    </div>
+                    </div> */}
                   </div>
-                  <div className="bg-white/20 p-4 rounded-lg">
+                  {/* <div className="bg-white/20 p-4 rounded-lg">
                     <div className="flex justify-between mb-2">
                       <span className="text-sm">Funding Success Rate</span>
                       <span className="text-sm font-medium">78%</span>
                     </div>
                     <Progress value={78} className="h-2 bg-white/30" />
-                  </div>
-                  <div className="grid grid-cols-3 gap-2">
+                  </div> */}
+                  {/* <div className="grid grid-cols-3 gap-2">
                     <div className="bg-white/20 p-3 rounded-lg text-center">
                       <div className="text-xs text-emerald-100">Min Investment</div>
                       <div className="text-lg font-bold">₹5K</div>
@@ -324,8 +185,8 @@ const Startup = {
                     <div className="bg-white/20 p-3 rounded-lg text-center">
                       <div className="text-xs text-emerald-100">Investors</div>
                       <div className="text-lg font-bold">5.2K</div>
-                    </div>
-                  </div>
+                    </div> */}
+                  {/* </div> */}
                 </div>
               </div>
             </div>
@@ -336,9 +197,9 @@ const Startup = {
         <section className="w-full py-12">
           <div className="container px-4 md:px-6">
             <Tabs defaultValue="opportunities" className="w-full">
-              <TabsList className="grid w-full grid-cols-3 mb-8">
+              <TabsList className="grid w-full grid-cols-2 mb-8">
                 <TabsTrigger value="opportunities">Investment Opportunities</TabsTrigger>
-                <TabsTrigger value="portfolio">My Portfolio</TabsTrigger>
+                {/* <TabsTrigger value="portfolio">My Portfolio</TabsTrigger> */}
                 <TabsTrigger value="insights">Market Insights</TabsTrigger>
               </TabsList>
 
@@ -347,7 +208,12 @@ const Startup = {
                 <div className="flex flex-col md:flex-row gap-4 justify-between">
                   <div className="relative w-full md:w-1/2">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-                    <Input placeholder="Search startups by name, industry, or location" className="pl-10" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
+                    <Input 
+                      placeholder="Search startups by name, industry, or location" 
+                      className="pl-10"
+                      value={searchQuery}
+                      onChange={handleSearchChange}
+                    />
                   </div>
                   <div className="flex gap-4">
                     <DropdownMenu>
@@ -361,15 +227,20 @@ const Startup = {
                       <DropdownMenuContent align="end" className="w-56">
                         <DropdownMenuLabel>Filter By</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={() => setActiveFilter("all")}>All Startups</DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setActiveFilter("low")}>Low Risk Only</DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setActiveFilter("moderate")}>
+                        <DropdownMenuItem onClick={() => setRiskFilter("all")}>All Startups</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setRiskFilter("low")}>Low Risk Only</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setRiskFilter("moderate")}>
                           Moderate Risk Only
                         </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setRiskFilter("high")}>
+                          High Risk Only
+                        </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>Funding Goal: Low to High</DropdownMenuItem>
-                        <DropdownMenuItem>Funding Goal: High to Low</DropdownMenuItem>
-                        <DropdownMenuItem>Days Left: Least to Most</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setSortOption("fundingLowToHigh")}>Funding Goal: Low to High</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setSortOption("fundingHighToLow")}>Funding Goal: High to Low</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setSortOption("daysLeft")}>Days Left: Least to Most</DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={resetFilters}>Reset All Filters</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
 
@@ -381,25 +252,62 @@ const Startup = {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                      <DropdownMenuItem onClick={() => setSelectedIndustry("All Industries")}>All Industries</DropdownMenuItem>
-<DropdownMenuItem onClick={() => setSelectedIndustry("Healthtech")}>Healthtech</DropdownMenuItem>
-<DropdownMenuItem onClick={() => setSelectedIndustry("Fintech")}>Fintech</DropdownMenuItem>
-<DropdownMenuItem onClick={() => setSelectedIndustry("Edtech")}>Edtech</DropdownMenuItem>
-<DropdownMenuItem onClick={() => setSelectedIndustry("E-commerce")}>E-commerce</DropdownMenuItem>
-<DropdownMenuItem onClick={() => setSelectedIndustry("AgriTech")}>AgriTech</DropdownMenuItem>
-<DropdownMenuItem onClick={() => setSelectedIndustry("Cybersecurity")}>Cybersecurity</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setIndustryFilter("all")}>All Industries</DropdownMenuItem>
+                        {uniqueIndustries.map((industry) => (
+                          <DropdownMenuItem 
+                            key={industry} 
+                            onClick={() => setIndustryFilter(industry)}
+                          >
+                            {industry}
+                          </DropdownMenuItem>
+                        ))}
                       </DropdownMenuContent>
                     </DropdownMenu>
 
-                    <Button className="bg-emerald-600 hover:bg-emerald-700">Find Matches</Button>
+                    <Button className="bg-emerald-600 hover:bg-emerald-700" onClick={resetFilters}>Reset Filters</Button>
                   </div>
                 </div>
 
-                {/* Featured Startup
-                <div className="mb-8">
-                  <h2 className="text-2xl font-bold mb-6">Featured Opportunity</h2>
-                  <FeaturedStartup startup={featuredStartup} />
-                </div> */}
+                {/* Filter Active Stats */}
+                {(searchQuery || riskFilter !== "all" || industryFilter !== "all" || sortOption) && (
+                  <div className="bg-gray-100 p-3 rounded-lg flex items-center justify-between">
+                    <div className="flex flex-wrap gap-2 items-center">
+                      <span className="text-sm font-medium">Active Filters:</span>
+                      
+                      {searchQuery && (
+                        <Badge variant="secondary" className="flex items-center gap-1">
+                          Search: "{searchQuery}"
+                        </Badge>
+                      )}
+                      
+                      {riskFilter !== "all" && (
+                        <Badge variant="secondary" className="flex items-center gap-1">
+                          Risk: {riskFilter === "low" ? "Low" : riskFilter === "moderate" ? "Moderate" : "High"}
+                        </Badge>
+                      )}
+                      
+                      {industryFilter !== "all" && (
+                        <Badge variant="secondary" className="flex items-center gap-1">
+                          Industry: {industryFilter}
+                        </Badge>
+                      )}
+                      
+                      {sortOption && (
+                        <Badge variant="secondary" className="flex items-center gap-1">
+                          Sort: {
+                            sortOption === "fundingLowToHigh" ? "Funding (Low to High)" : 
+                            sortOption === "fundingHighToLow" ? "Funding (High to Low)" : 
+                            "Days Left"
+                          }
+                        </Badge>
+                      )}
+                    </div>
+                    
+                    <span className="text-sm">
+                      Showing {filteredStartups.length} of {startups.length} startups
+                    </span>
+                  </div>
+                )}
 
                 {/* Startup Listings */}
                 <div>
@@ -412,124 +320,22 @@ const Startup = {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {startups?.length > 0 ? (
-    startups.map((startup) => (
-      <StartupCard key={startup._id} startup={startup} />
-    ))
-  ) : (
-    <p className="text-gray-500 col-span-full">No startup opportunities available.</p>
-  )}
-</div>
-
-
+                    {filteredStartups?.length > 0 ? (
+                      filteredStartups.map((startup) => (
+                        <StartupCard key={startup._id} startup={startup} />
+                      ))
+                    ) : (
+                      <div className="col-span-full text-center py-12">
+                        <div className="text-gray-500 mb-2">No startups match your current filters</div>
+                        <Button onClick={resetFilters} variant="outline">Reset All Filters</Button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </TabsContent>
 
               <TabsContent value="portfolio" className="space-y-8">
-                {/* Portfolio Overview */}
-                {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                  <Card>
-                    <CardHeader className="pb-2">
-                      <CardDescription>Total Invested</CardDescription>
-                      <CardTitle className="text-2xl">₹{portfolioStats.totalInvested.toLocaleString()}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="text-xs text-emerald-600 flex items-center gap-1">
-                        <TrendingUp className="h-3 w-3" /> +15% from last quarter
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader className="pb-2">
-                      <CardDescription>Active Investments</CardDescription>
-                      <CardTitle className="text-2xl">{portfolioStats.activeInvestments}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="text-xs text-emerald-600 flex items-center gap-1">
-                        <TrendingUp className="h-3 w-3" /> +2 new this quarter
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader className="pb-2">
-                      <CardDescription>Average Return</CardDescription>
-                      <CardTitle className="text-2xl">{portfolioStats.averageReturn}%</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="text-xs text-emerald-600 flex items-center gap-1">
-                        <TrendingUp className="h-3 w-3" /> +3.5% from last year
-                      </div>
-                    </CardContent>
-                  </Card> */}
-
-                  {/* <Card>
-                    <CardHeader className="pb-2">
-                      <CardDescription>Pending Opportunities</CardDescription>
-                      <CardTitle className="text-2xl">{portfolioStats.pendingOpportunities}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <Button variant="outline" size="sm" className="w-full">
-                        Review
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </div> */}
-
-                {/* Portfolio Performance Chart */}
-                {/* <Card>
-                  <CardHeader>
-                    <CardTitle>Portfolio Performance</CardTitle>
-                    <CardDescription>Track your investment growth over time</CardDescription>
-                  </CardHeader>
-                  <CardContent className="h-80 flex items-center justify-center">
-                    <div className="text-center text-gray-500">
-                      <LineChart className="h-16 w-16 mx-auto mb-4 text-emerald-600 opacity-50" />
-                      <p>Portfolio performance chart would appear here</p>
-                      <p className="text-sm">Showing historical returns and projections</p>
-                    </div>
-                  </CardContent>
-                </Card> */}
-
-                {/* Active Investments */}
-                {/* <div>
-                  <h2 className="text-2xl font-bold mb-6">Active Investments</h2>
-                  <div className="space-y-4">
-                    {portfolioInvestments.map((investment) => (
-                      <Card key={investment.id}>
-                        <CardContent className="p-6">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-4">
-                              <Avatar className="h-12 w-12 border">
-                                <AvatarImage src={investment.logo || "/placeholder.svg"} alt={investment.name} />
-                                <AvatarFallback>{investment.name.substring(0, 2)}</AvatarFallback>
-                              </Avatar>
-                              <div>
-                                <h3 className="font-semibold">{investment.name}</h3>
-                                <p className="text-sm text-gray-500">
-                                  Invested on {new Date(investment.date).toLocaleDateString()}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="text-right">
-                              <div className="flex items-center gap-2">
-                                <span className="font-semibold">₹{investment.currentValue.toLocaleString()}</span>
-                                <Badge
-                                  variant={investment.returnPercentage > 0 ? "success" : "destructive"}
-                                  className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100"
-                                >
-                                  +{investment.returnPercentage}%
-                                </Badge>
-                              </div>
-                              <p className="text-sm text-gray-500">Initial: ₹{investment.invested.toLocaleString()}</p>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </div> */}
+                {/* Your portfolio content */}
               </TabsContent>
 
               <TabsContent value="insights" className="space-y-8">
@@ -732,7 +538,7 @@ const Startup = {
                 </div>
 
                 {/* Upcoming Events */}
-                <Card>
+                {/* <Card>
                   <CardHeader>
                     <CardTitle>Upcoming Events</CardTitle>
                     <CardDescription>Connect with founders and fellow investors</CardDescription>
@@ -809,7 +615,7 @@ const Startup = {
                       View All Events
                     </Button>
                   </CardFooter>
-                </Card>
+                </Card> */}
               </TabsContent>
             </Tabs>
           </div>
@@ -907,7 +713,7 @@ const Startup = {
         </section>
 
         {/* CTA Section */}
-        <section className="w-full py-12 md:py-24 bg-emerald-600 text-white">
+        {/* <section className="w-full py-12 md:py-24 bg-emerald-600 text-white">
           <div className="container px-4 md:px-6 text-center">
             <div className="mx-auto max-w-3xl space-y-4">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
@@ -925,7 +731,7 @@ const Startup = {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
       </main>
 
       <InvestorFooter />

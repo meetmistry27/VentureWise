@@ -58,11 +58,11 @@ export function StartupCard({ startup }) {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 text-sm">
-              <div className="bg-gray-50 p-2 rounded-md">
-                <div className="text-xs text-gray-500">Risk Score</div>
-                <div className="font-medium">{startup.riskAssessment.riskScore}/100</div>
-              </div>
+            <div className="grid grid-cols-1 gap-2 text-sm">
+                {/* <div className="bg-gray-50 p-2 rounded-md">
+                  <div className="text-xs text-gray-500">Risk Score</div>
+                  <div className="font-medium">{startup.riskAssessment.riskScore}/100</div>
+                </div> */}
               <div className="bg-gray-50 p-2 rounded-md">
                 <div className="text-xs text-gray-500">Min Investment</div>
                 <div className="font-medium">₹{(startup.minInvestment / 1000).toFixed(0)}K</div>
@@ -83,9 +83,9 @@ export function StartupCard({ startup }) {
         </div>
       </CardContent>
       <CardFooter className="flex justify-between p-4 border-t bg-gray-50">
-        <Button variant="outline" size="sm">
+        {/* <Button variant="outline" size="sm">
           Add to Watchlist
-        </Button>
+        </Button> */}
         <Link href={`/investor/startup/${startup.id}/invest`}>
           <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 flex items-center gap-1">
             Invest Now

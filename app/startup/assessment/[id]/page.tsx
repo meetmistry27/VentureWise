@@ -12,6 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Progress } from "@/components/ui/progress"
 import { AssessmentResult } from "@/components/assessment-result"
+import cluster from "cluster"
 
 export default function AssessmentPage({ params }) {
   const { id } = params
@@ -171,7 +172,7 @@ export default function AssessmentPage({ params }) {
   
       // Make prediction request to Flask backend
       console.log("Sending prediction request to Flask backend:", processedData);
-      const response = await fetch("http://127.0.0.1:5000/predict", {
+      const response = await fetch("https://startuprisk.onrender.com/predict", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -191,12 +192,16 @@ export default function AssessmentPage({ params }) {
 
       const resultData ={
         ...processedData,
-        riskAssessment : result
+        riskAssessment: {
+          riskLevel: result.risk_label,
+          riskScore: result.score,
+          cluster: result.cluster,
+        }
       }
 
       try {
         const res = await fetch(`/api/startups/assessment/${id}`, {
-          method: 'PATCH',
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -292,9 +297,9 @@ export default function AssessmentPage({ params }) {
             <TrendingUp className="h-6 w-6 text-emerald-600" />
             <span className="text-xl font-bold">VentureWise</span>
           </div>
-          <Link href="/" className="flex items-center text-sm font-medium text-gray-500 hover:text-emerald-600">
+          <Link href="/startup/dashboard" className="flex items-center text-sm font-medium text-gray-500 hover:text-emerald-600">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Home
+            Back to Dashboard
           </Link>
         </div>
       </header>
