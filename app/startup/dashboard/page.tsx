@@ -22,7 +22,7 @@ export default function StartupDashboard() {
   const [startups, setStartups] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const { user } = useAuth()
+  //const { user } = useAuth()
   const { toast } = useToast()
   const router = useRouter()
   const [refresh, setRefresh] = useState(false)
@@ -69,7 +69,7 @@ export default function StartupDashboard() {
   //   } else {
   //     setLoading(false)
   //   }
-  }, [user, toast, refresh])
+  }, [toast, refresh])
 
   const handleCreateStartup = () => {
     router.push("/startup/create")
