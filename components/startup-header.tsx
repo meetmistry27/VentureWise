@@ -52,9 +52,9 @@ const { user, logout } = useAuth()
           <Link href="/profile" className="text-sm font-medium hover:text-emerald-600 transition-colors">
             Profile
           </Link>
-          <Link href="/startup/about" className="text-sm font-medium hover:text-emerald-600 transition-colors">
+          {/* <Link href="/startup/about" className="text-sm font-medium hover:text-emerald-600 transition-colors">
             How It Works
-          </Link>
+          </Link> */}
           {/* <Link href="/startup/create" className="text-sm font-medium hover:text-emerald-600 transition-colors">
             Create Startup
           </Link> */}

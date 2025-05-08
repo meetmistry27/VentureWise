@@ -4,6 +4,7 @@
 import { useSearchParams  } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
+import { StartupHeader } from '@/components/startup-header';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -226,6 +227,9 @@ export default function StartupGrowthCharts({ params }) {
   };
 
   return (
+    <div>
+      <StartupHeader/>
+   
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8 text-center">
         {name} - 5 Year Growth Projection
@@ -280,6 +284,7 @@ export default function StartupGrowthCharts({ params }) {
           <Line options={chartOptions} data={marketShareChartData} />
         </div>
       </div>
+    </div>
     </div>
   );
 }

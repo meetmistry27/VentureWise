@@ -51,9 +51,9 @@ export function InvestorHeader() {
           <Link href="/profile" className="text-sm font-medium hover:text-emerald-600 transition-colors">
             Profile
           </Link>
-          <Link href="/investor/about" className="text-sm font-medium hover:text-emerald-600 transition-colors">
+          {/* <Link href="/investor/about" className="text-sm font-medium hover:text-emerald-600 transition-colors">
             How It Works
-          </Link>
+          </Link> */}
           {/* <Link href="/investor/insights" className="text-sm font-medium hover:text-emerald-600 transition-colors">
             Insights
           </Link>

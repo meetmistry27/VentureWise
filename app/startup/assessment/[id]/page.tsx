@@ -545,7 +545,7 @@ export default function AssessmentPage({ params }) {
                         </div>
 
                         <div className="space-y-2">
-                          <Label htmlFor="runway">Runway in ₹</Label>
+                          <Label htmlFor="runway">Runway in Months</Label>
                           <Input
                             type="number"
                             id="runway"
