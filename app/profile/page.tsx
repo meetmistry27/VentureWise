@@ -54,10 +54,10 @@ export default function ProfilePage() {
         const token = localStorage.getItem("token")
         const userId = localStorage.getItem("userId")
         
-        if (!token || !userId) {
-          router.push("/login")
-          return
-        }
+        // if (!token || !userId) {
+        //   router.push("/login")
+        //   return
+        // }
         
         const response = await fetch("/api/profile", {
           method: "GET",
