@@ -50,53 +50,53 @@ export default function ProfilePage() {
       }
 
       // If not, try to fetch the profile directly from API
-      try {
-        const token = localStorage.getItem("token")
-        const userId = localStorage.getItem("userId")
+      // try {
+      //   const token = localStorage.getItem("token")
+      //   const userId = localStorage.getItem("userId")
         
-        // if (!token || !userId) {
-        //   router.push("/login")
-        //   return
-        // }
+      //   if (!token || !userId) {
+      //     router.push("/login")
+      //     return
+      //   }
         
-        const response = await fetch("/api/profile", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token} ${userId}`,
-          },
-        })
+      //   const response = await fetch("/api/profile", {
+      //     method: "GET",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       "Authorization": `Bearer ${token} ${userId}`,
+      //     },
+      //   })
 
-        if (!response.ok) {
-          const errorData = await response.json()
-          throw new Error(errorData.message || "Failed to fetch profile")
-        }
+      //   if (!response.ok) {
+      //     const errorData = await response.json()
+      //     throw new Error(errorData.message || "Failed to fetch profile")
+      //   }
 
-        const data = await response.json()
+      //   const data = await response.json()
         
-        if (!data.success || !data.data) {
-          throw new Error("Failed to fetch profile data")
-        }
+      //   if (!data.success || !data.data) {
+      //     throw new Error("Failed to fetch profile data")
+      //   }
 
-        const profileData = data.data
+      //   const profileData = data.data
         
-        setFormData({
-          username: profileData.username || "",
-          email: profileData.email || "",
-          phoneNumber: profileData.phoneNumber || "",
-          location: profileData.location || "",
-          bio: profileData.bio || "",
-          profileImage: profileData.profileImage || "/placeholder.svg?height=200&width=200",
-          role: profileData.role || "1 khokha 2",
-          walletAddress : profileData.walletAddress || "joker",
-        })
-      } catch (error) {
-        console.error("Failed to fetch profile:", error)
-        // If we can't fetch the profile and there's no user, redirect to login
-        if (!authLoading && !user) {
-          router.push("/login")
-        }
-      }
+      //   setFormData({
+      //     username: profileData.username || "",
+      //     email: profileData.email || "",
+      //     phoneNumber: profileData.phoneNumber || "",
+      //     location: profileData.location || "",
+      //     bio: profileData.bio || "",
+      //     profileImage: profileData.profileImage || "/placeholder.svg?height=200&width=200",
+      //     role: profileData.role || "1 khokha 2",
+      //     walletAddress : profileData.walletAddress || "joker",
+      //   })
+      // } catch (error) {
+      //   console.error("Failed to fetch profile:", error)
+      //   // If we can't fetch the profile and there's no user, redirect to login
+      //   if (!authLoading && !user) {
+      //     router.push("/login")
+      //   }
+      //}
     }
 
     fetchUserProfile()
