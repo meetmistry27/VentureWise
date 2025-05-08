@@ -53,10 +53,12 @@ export default function PortfolioPage() {
   })
 
   const investmentsPerPage = 10
-  const userId = localStorage.getItem("userId");  
-  const token = localStorage.getItem("token");  
+  //const userId = localStorage.getItem("userId");  
+  //const token = localStorage.getItem("token");  
 
   useEffect(() => {
+    const userId = localStorage.getItem("userId");  
+    const token = localStorage.getItem("token");
     const fetchInvestments = async () => {
       try {
         setLoading(true)
